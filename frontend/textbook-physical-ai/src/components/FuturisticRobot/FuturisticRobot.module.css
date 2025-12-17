@@ -1,0 +1,152 @@
+.futuristic-robot-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.orbital-animation {
+  border-radius: 50%;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+  background: radial-gradient(circle, rgba(10,10,30,0.8) 0%, rgba(0,0,10,1) 100%);
+}
+
+.static-robot {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.static-robot-body {
+  position: relative;
+  width: 60%;
+  height: 60%;
+}
+
+.robot-head {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 0 15px currentColor;
+}
+
+.robot-body {
+  width: 60px;
+  height: 80px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 15px currentColor;
+}
+
+.robot-core {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 20px currentColor;
+}
+
+.robot-left-arm {
+  width: 10px;
+  height: 40px;
+  position: absolute;
+  top: 45%;
+  left: 35%;
+  transform: rotate(-20deg);
+  box-shadow: 0 0 15px currentColor;
+}
+
+.robot-right-arm {
+  width: 10px;
+  height: 40px;
+  position: absolute;
+  top: 45%;
+  left: 65%;
+  transform: rotate(20deg);
+  box-shadow: 0 0 15px currentColor;
+}
+
+.robot-left-leg {
+  width: 12px;
+  height: 45px;
+  position: absolute;
+  top: 70%;
+  left: 42%;
+  transform: rotate(10deg);
+  box-shadow: 0 0 15px currentColor;
+}
+
+.robot-right-leg {
+  width: 12px;
+  height: 45px;
+  position: absolute;
+  top: 70%;
+  left: 58%;
+  transform: rotate(-10deg);
+  box-shadow: 0 0 15px currentColor;
+}
+
+.orbital-rings {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.orbital-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border: 1px solid;
+  border-style: solid;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: rotate 10s linear infinite;
+}
+
+.orbital-ring:nth-child(2) {
+  animation-direction: reverse;
+  animation-duration: 15s;
+}
+
+.orbital-ring:nth-child(3) {
+  animation-duration: 12s;
+}
+
+.orbital-ring:nth-child(4) {
+  animation-direction: reverse;
+  animation-duration: 18s;
+}
+
+.orbital-ring:nth-child(5) {
+  animation-duration: 20s;
+}
+
+@keyframes rotate {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .orbital-ring {
+    animation: none;
+  }
+}

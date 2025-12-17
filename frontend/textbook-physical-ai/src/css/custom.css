@@ -1,0 +1,1088 @@
+/**
+ * Modern technical theme for Physical AI & Robotics documentation
+ * Two-color combination of purple and teal with consistent typography and solid color schemes
+ */
+
+/* Import technical fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Source+Sans+3:wght@300;400;600;700;900&display=swap');
+
+/* Modern technical color palette with two-color combination */
+:root {
+  /* Primary colors - Purple theme */
+  --ifm-color-primary: #7c3aed; /* Purple */
+  --ifm-color-primary-dark: #6d28d9;
+  --ifm-color-primary-darker: #5b21b6;
+  --ifm-color-primary-darkest: #4c1d95;
+  --ifm-color-primary-light: #8b5cf6;
+  --ifm-color-primary-lighter: #a78bfa;
+  --ifm-color-primary-lightest: #c4b5fd;
+
+  /* Secondary colors - Teal theme */
+  --ifm-color-secondary: #0d9488; /* Teal */
+  --ifm-color-secondary-dark: #0f766e;
+  --ifm-color-secondary-darker: #115e59;
+  --ifm-color-secondary-darkest: #134e4a;
+  --ifm-color-secondary-light: #14b8a6;
+  --ifm-color-secondary-lighter: #7dd3fc;
+  --ifm-color-secondary-lightest: #bae6fd;
+
+  /* Supporting colors */
+  --ifm-color-success: #16a34a; /* Green */
+  --ifm-color-info: #0891b2; /* Teal */
+  --ifm-color-warning: #d97706; /* Amber */
+  --ifm-color-danger: #dc2626; /* Red */
+
+  /* Backgrounds - Solid colors only, no gradients */
+  --ifm-color-background: #fafafa; /* Light background */
+  --ifm-color-background-light: #ffffff; /* Pure white background */
+  --ifm-color-background-card: #ffffff; /* Card background */
+  --ifm-color-background-surface: #f4f4f5; /* Surface background */
+
+  /* Text colors */
+  --ifm-color-text: #111827; /* Dark text */
+  --ifm-color-text-secondary: #6b7280; /* Secondary text */
+  --ifm-color-text-tertiary: #9ca3af; /* Tertiary text */
+  --ifm-color-text-muted: #d1d5db; /* Muted text */
+
+  /* Borders */
+  --ifm-color-border: #e5e7eb; /* Border color */
+  --ifm-color-border-light: #d1d5db; /* Lighter border */
+
+  /* Typography - Two-color contrast font */
+  --ifm-font-family-base: 'Source Sans 3', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --ifm-font-family-heading: 'Source Sans 3', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --ifm-font-family-monospace: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+
+  /* Code styling */
+  --ifm-code-font-size: 90%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+
+  /* Spacing */
+  --ifm-spacing-horizontal: 24px;
+  --ifm-spacing-vertical: 24px;
+
+  /* Consistent spacing and sizing */
+  --ifm-global-radius: 8px;
+  --ifm-global-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* Light mode specific styles */
+[data-theme='light'] {
+  /* Primary colors - Purple theme */
+  --ifm-color-primary: #7c3aed; /* Purple */
+  --ifm-color-primary-dark: #6d28d9;
+  --ifm-color-primary-darker: #5b21b6;
+  --ifm-color-primary-darkest: #4c1d95;
+  --ifm-color-primary-light: #8b5cf6;
+  --ifm-color-primary-lighter: #a78bfa;
+  --ifm-color-primary-lightest: #c4b5fd;
+
+  /* Secondary colors - Teal theme */
+  --ifm-color-secondary: #0d9488; /* Teal */
+  --ifm-color-secondary-dark: #0f766e;
+  --ifm-color-secondary-darker: #115e59;
+  --ifm-color-secondary-darkest: #134e4a;
+  --ifm-color-secondary-light: #14b8a6;
+  --ifm-color-secondary-lighter: #7dd3fc;
+  --ifm-color-secondary-lightest: #bae6fd;
+
+  /* Supporting colors */
+  --ifm-color-success: #16a34a; /* Green */
+  --ifm-color-info: #0891b2; /* Teal */
+  --ifm-color-warning: #d97706; /* Amber */
+  --ifm-color-danger: #dc2626; /* Red */
+
+  /* Backgrounds - Solid colors only, no gradients */
+  --ifm-color-background: #ffffff; /* Pure white background */
+  --ifm-color-background-light: #f8fafc; /* Light background */
+  --ifm-color-background-card: #ffffff; /* Card background */
+  --ifm-color-background-surface: #f1f5f9; /* Surface background */
+
+  /* Text colors */
+  --ifm-color-text: #1e293b; /* Dark text with better contrast */
+  --ifm-color-text-secondary: #64748b; /* Secondary text */
+  --ifm-color-text-tertiary: #94a3b8; /* Tertiary text */
+  --ifm-color-text-muted: #cbd5e1; /* Muted text */
+
+  /* Borders */
+  --ifm-color-border: #e2e8f0; /* Border color */
+  --ifm-color-border-light: #cbd5e1; /* Lighter border */
+}
+
+/* Dark mode specific styles */
+[data-theme='dark'] {
+  /* Primary colors - Purple theme */
+  --ifm-color-primary: #a78bfa; /* Light purple */
+  --ifm-color-primary-dark: #7c3aed;
+  --ifm-color-primary-darker: #6d28d9;
+  --ifm-color-primary-darkest: #5b21b6;
+  --ifm-color-primary-light: #c4b5fd;
+  --ifm-color-primary-lighter: #ddd6fe;
+  --ifm-color-primary-lightest: #ede9fe;
+
+  /* Secondary colors - Teal theme */
+  --ifm-color-secondary: #14b8a6; /* Light teal */
+  --ifm-color-secondary-dark: #0d9488;
+  --ifm-color-secondary-darker: #0f766e;
+  --ifm-color-secondary-darkest: #115e59;
+  --ifm-color-secondary-light: #7dd3fc;
+  --ifm-color-secondary-lighter: #a5f3fc;
+  --ifm-color-secondary-lightest: #ccfbf1;
+
+  /* Supporting colors */
+  --ifm-color-success: #4ade80; /* Light green */
+  --ifm-color-info: #22d3ee; /* Light teal */
+  --ifm-color-warning: #fbbf24; /* Light amber */
+  --ifm-color-danger: #f87171; /* Light red */
+
+  /* Backgrounds - Solid colors only, no gradients */
+  --ifm-color-background: #0f0f13; /* Dark background */
+  --ifm-color-background-light: #1a1a1f; /* Darker gray */
+  --ifm-color-background-card: #1a1a1f; /* Card background */
+  --ifm-color-background-surface: #2d2d3a; /* Surface background */
+
+  /* Text colors */
+  --ifm-color-text: #f8fafc; /* Light text with good contrast */
+  --ifm-color-text-secondary: #cbd5e1; /* Secondary text */
+  --ifm-color-text-tertiary: #94a3b8; /* Tertiary text */
+  --ifm-color-text-muted: #64748b; /* Muted text */
+
+  /* Borders */
+  --ifm-color-border: #334155; /* Border color */
+  --ifm-color-border-light: #475569; /* Lighter border */
+
+  --docusaurus-highlighted-code-line-bg: rgba(255, 255, 255, 0.3);
+}
+
+/* Consistent typography across the site */
+html {
+  font-family: var(--ifm-font-family-base);
+  font-size: 16px;
+  line-height: 1.6;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Heading typography with specific sans-serif font */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--ifm-font-family-heading);
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: 1rem;
+  color: var(--ifm-color-text);
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+h4 {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+h5 {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+h6 {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+p {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--ifm-color-text);
+  margin-bottom: 1rem;
+  font-family: var(--ifm-font-family-base);
+}
+
+/* Enhanced navigation styling with two-color combination */
+.navbar {
+  background-color: var(--ifm-color-background) !important;
+  border-bottom: 1px solid var(--ifm-color-border) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
+  min-height: 60px !important;
+  padding: 0.75rem 0 !important;
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 1000 !important;
+  width: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.navbar__inner {
+  align-items: center !important;
+  padding: 0 var(--ifm-spacing-horizontal) !important;
+  width: 100% !important;
+  display: flex !important;
+  justify-content: space-between !important;
+}
+
+.navbar__items {
+  align-items: center !important;
+  display: flex !important;
+}
+
+.navbar__brand {
+  color: var(--ifm-color-primary) !important;
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin-right: 2rem;
+  font-family: var(--ifm-font-family-heading) !important;
+}
+
+.navbar__brand:hover {
+  color: var(--ifm-color-primary-dark) !important;
+}
+
+.navbar__item {
+  margin: 0 0.5rem !important;
+}
+
+.navbar__link {
+  color: var(--ifm-color-text-secondary) !important;
+  font-weight: 500;
+  font-size: 0.9rem;
+  padding: 0.5rem 0.75rem !important;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  font-family: var(--ifm-font-family-base);
+}
+
+.navbar__link:hover {
+  color: var(--ifm-color-primary) !important;
+  background-color: var(--ifm-color-background-light) !important;
+  text-decoration: none;
+}
+
+.navbar__link--active {
+  color: var(--ifm-color-primary) !important;
+  background-color: var(--ifm-color-background-light) !important;
+  font-weight: 600;
+}
+
+
+/* Sidebar styling with two-color combination */
+.menu {
+  background-color: var(--ifm-color-background) !important;
+  border-right: 1px solid var(--ifm-color-border) !important;
+}
+
+.menu__list {
+  padding: 0.5rem 0 !important;
+}
+
+.menu__link {
+  color: var(--ifm-color-text-secondary) !important;
+  font-weight: 500;
+  font-size: 0.9rem;
+  padding: 0.5rem 1rem !important;
+  border-radius: 4px;
+  margin: 0 0.5rem !important;
+  transition: all 0.2s ease;
+  font-family: var(--ifm-font-family-base);
+}
+
+.menu__link:hover {
+  color: var(--ifm-color-primary) !important;
+  background-color: var(--ifm-color-background-light) !important;
+  text-decoration: none;
+}
+
+.menu__link--active {
+  color: var(--ifm-color-primary) !important;
+  background-color: var(--ifm-color-background-light) !important;
+  font-weight: 600;
+}
+
+/* Enhanced card styling with two-color combination */
+.card {
+  background-color: var(--ifm-color-background-card) !important;
+  border: 1px solid var(--ifm-color-border) !important;
+  border-radius: var(--ifm-global-radius) !important;
+  box-shadow: var(--ifm-global-shadow) !important;
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15) !important;
+  border-color: var(--ifm-color-border-light) !important;
+}
+
+.card__header,
+.card__footer {
+  background-color: transparent !important;
+  border-color: var(--ifm-color-border) !important;
+}
+
+/* Enhanced button styling with two-color combination */
+.button {
+  border-radius: var(--ifm-global-radius) !important;
+  font-weight: 500 !important;
+  text-transform: none !important;
+  letter-spacing: normal !important;
+  transition: all 0.2s ease !important;
+  font-family: var(--ifm-font-family-base);
+}
+
+.button--primary {
+  background-color: var(--ifm-color-primary) !important;
+  border-color: var(--ifm-color-primary) !important;
+  color: white !important;
+}
+
+.button--primary:hover {
+  background-color: var(--ifm-color-primary-dark) !important;
+  border-color: var(--ifm-color-primary-dark) !important;
+  color: white !important;
+  transform: translateY(-1px);
+}
+
+.button--secondary {
+  background-color: transparent !important;
+  border-color: var(--ifm-color-border) !important;
+  color: var(--ifm-color-text) !important;
+}
+
+.button--secondary:hover {
+  background-color: var(--ifm-color-background-light) !important;
+  border-color: var(--ifm-color-border-light) !important;
+  color: var(--ifm-color-text) !important;
+}
+
+/* Enhanced footer styling with two-color combination */
+.footer {
+  background-color: var(--ifm-color-background) !important;
+  border-top: 1px solid var(--ifm-color-border) !important;
+  padding: 2rem 0 !important;
+}
+
+.footer__title {
+  color: var(--ifm-color-primary) !important;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  font-family: var(--ifm-font-family-heading) !important;
+}
+
+.footer__link-item {
+  color: var(--ifm-color-text-secondary) !important;
+  font-weight: 400;
+  font-family: var(--ifm-font-family-base);
+}
+
+.footer__link-item:hover {
+  color: var(--ifm-color-primary) !important;
+  text-decoration: none;
+}
+
+.footer__copyright {
+  color: var(--ifm-color-text-tertiary) !important;
+  font-size: 0.85rem;
+  font-family: var(--ifm-font-family-base);
+}
+
+/* Enhanced code block styling */
+.codeBlockContainer_node_modules-\@docusaurus-theme-classic-lib-next-theme-CodeBlock-styles-module {
+  border-radius: var(--ifm-global-radius) !important;
+  overflow: hidden !important;
+  background-color: var(--ifm-color-background-card) !important;
+}
+
+/* Enhanced table styling */
+.table {
+  border: 1px solid var(--ifm-color-border) !important;
+  border-radius: var(--ifm-global-radius) !important;
+  overflow: hidden !important;
+  background-color: var(--ifm-color-background) !important;
+}
+
+.table thead {
+  background-color: var(--ifm-color-background-light) !important;
+}
+
+.table th,
+.table td {
+  border: 1px solid var(--ifm-color-border) !important;
+  padding: 0.75rem !important;
+  font-family: var(--ifm-font-family-base);
+}
+
+.table th {
+  font-family: var(--ifm-font-family-heading) !important;
+  font-weight: 600;
+  color: var(--ifm-color-text);
+}
+
+.table td {
+  color: var(--ifm-color-text-secondary);
+}
+
+/* Enhanced alert styling */
+.alert {
+  border-radius: var(--ifm-global-radius) !important;
+  border: 1px solid var(--ifm-color-border) !important;
+  font-family: var(--ifm-font-family-base);
+}
+
+.alert--primary {
+  background-color: color-mix(in srgb, var(--ifm-color-primary), transparent 90%) !important;
+  border-left-color: var(--ifm-color-primary) !important;
+}
+
+.alert--secondary {
+  background-color: color-mix(in srgb, var(--ifm-color-secondary), transparent 90%) !important;
+  border-left-color: var(--ifm-color-secondary) !important;
+}
+
+.alert--success {
+  background-color: color-mix(in srgb, var(--ifm-color-success), transparent 90%) !important;
+  border-left-color: var(--ifm-color-success) !important;
+}
+
+.alert--info {
+  background-color: color-mix(in srgb, var(--ifm-color-info), transparent 90%) !important;
+  border-left-color: var(--ifm-color-info) !important;
+}
+
+.alert--warning {
+  background-color: color-mix(in srgb, var(--ifm-color-warning), transparent 90%) !important;
+  border-left-color: var(--ifm-color-warning) !important;
+}
+
+.alert--danger {
+  background-color: color-mix(in srgb, var(--ifm-color-danger), transparent 90%) !important;
+  border-left-color: var(--ifm-color-danger) !important;
+}
+
+/* Enhanced breadcrumb styling */
+.breadcrumbs {
+  background-color: var(--ifm-color-background-light) !important;
+  border-radius: var(--ifm-global-radius) !important;
+  padding: 0.75rem !important;
+  margin-bottom: 1.5rem !important;
+  font-family: var(--ifm-font-family-base);
+}
+
+.breadcrumbs__item {
+  font-size: 0.85rem !important;
+}
+
+.breadcrumbs__link {
+  color: var(--ifm-color-text-secondary) !important;
+}
+
+.breadcrumbs__link:hover {
+  color: var(--ifm-color-primary) !important;
+  text-decoration: none !important;
+}
+
+/* Enhanced pagination styling */
+.pagination-nav__link {
+  border: 1px solid var(--ifm-color-border) !important;
+  border-radius: var(--ifm-global-radius) !important;
+  transition: all 0.2s ease !important;
+  font-family: var(--ifm-font-family-base);
+}
+
+.pagination-nav__link:hover {
+  border-color: var(--ifm-color-border-light) !important;
+  transform: translateY(-1px);
+}
+
+/* Enhanced list styling */
+ul, ol {
+  margin: 1rem 0 !important;
+  padding-left: 1.5rem !important;
+  font-family: var(--ifm-font-family-base);
+}
+
+li {
+  margin-bottom: 0.25rem !important;
+}
+
+/* Enhanced blockquote styling */
+blockquote {
+  border-left: 3px solid var(--ifm-color-primary) !important;
+  background-color: var(--ifm-color-background-light) !important;
+  padding: 1rem 1.25rem !important;
+  margin: 1.5rem 0 !important;
+  border-radius: 0 var(--ifm-global-radius) var(--ifm-global-radius) 0 !important;
+  font-style: normal !important;
+  font-family: var(--ifm-font-family-base);
+  color: var(--ifm-color-text);
+}
+
+/* Enhanced horizontal rule styling */
+hr {
+  border: none !important;
+  border-top: 1px solid var(--ifm-color-border) !important;
+  margin: 2rem 0 !important;
+}
+
+/* Enhanced focus styling for accessibility */
+button:focus,
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 2px solid var(--ifm-color-primary) !important;
+  outline-offset: 2px !important;
+  border-radius: 2px !important;
+}
+
+/* Enhanced search styling */
+.navbar__search-input {
+  border: 1px solid var(--ifm-color-border) !important;
+  border-radius: var(--ifm-global-radius) !important;
+  padding: 0.5rem 0.75rem !important;
+  background-color: var(--ifm-color-background-light) !important;
+  color: var(--ifm-color-text) !important;
+  font-family: var(--ifm-font-family-base);
+}
+
+/* TextBook link styling */
+.navbar__item.navbar__link.textbook-link {
+  font-size: 1.1rem !important;
+  font-weight: 500;
+  margin-left: 1rem;
+  padding: 0.5rem 0.75rem !important;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.navbar__item.navbar__link.textbook-link:hover {
+  background-color: var(--ifm-color-background-light) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Navbar title styling */
+.navbar__title-main {
+  font-size: 1.3rem !important;
+  font-weight: 700;
+}
+
+/* GitHub icon and text styling */
+.header-github-link {
+  display: flex;
+  align-items: center;
+  color: var(--ifm-color-text-secondary) !important;
+  text-decoration: none !important;
+  margin-left: 0.5rem;
+  padding: 0.5rem 0.75rem !important;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+/* GitHub icon and text styling */
+.header-github-link {
+  display: flex;
+  align-items: center;
+  color: var(--ifm-color-text-secondary) !important;
+  text-decoration: none !important;
+  margin-left: 0.5rem;
+  padding: 0.5rem 0.75rem !important;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.header-github-link:hover {
+  color: var(--ifm-color-primary) !important;
+  background-color: var(--ifm-color-background-light) !important;
+  text-decoration: none !important;
+}
+
+.header-github-link svg {
+  width: 24px;
+  height: 24px;
+  margin-right: 0.5rem;
+  flex-shrink: 0;
+}
+
+/* GitHub icon color for light mode */
+[data-theme='light'] .header-github-link svg {
+  fill: #000000;
+}
+
+/* GitHub icon color for dark mode */
+[data-theme='dark'] .header-github-link svg {
+  fill: #ffffff;
+}
+
+.navbar__search-input::placeholder {
+  color: var(--ifm-color-text-tertiary) !important;
+}
+
+/* Dark/light mode toggle styling */
+.react-toggle {
+  display: none !important; /* Will be handled by theme's built-in toggle */
+}
+
+/* Enhanced link styling */
+a {
+  color: var(--ifm-color-primary) !important;
+  text-decoration: none !important;
+  transition: all 0.2s ease !important;
+  font-family: var(--ifm-font-family-base);
+}
+
+a:hover {
+  color: var(--ifm-color-primary-light) !important;
+  text-decoration: underline !important;
+}
+
+/* Ensure all elements use CSS variables for proper theming */
+body {
+  background-color: var(--ifm-color-background) !important;
+  color: var(--ifm-color-text) !important;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+html {
+  background-color: var(--ifm-color-background) !important;
+}
+
+/* Ensure consistent text and background colors throughout the site */
+.navbar {
+  background-color: var(--ifm-color-background) !important;
+  color: var(--ifm-color-text) !important;
+  border-color: var(--ifm-color-border) !important;
+}
+
+.footer {
+  background-color: var(--ifm-color-background) !important;
+  color: var(--ifm-color-text) !important;
+  border-color: var(--ifm-color-border) !important;
+}
+
+.menu {
+  background-color: var(--ifm-color-background) !important;
+  color: var(--ifm-color-text) !important;
+  border-color: var(--ifm-color-border) !important;
+}
+
+.table {
+  background-color: var(--ifm-color-background) !important;
+  color: var(--ifm-color-text) !important;
+  border-color: var(--ifm-color-border) !important;
+}
+
+.alert {
+  background-color: var(--ifm-color-background-surface) !important;
+  color: var(--ifm-color-text) !important;
+  border-color: var(--ifm-color-border) !important;
+}
+
+.card {
+  background-color: var(--ifm-color-background-card) !important;
+  color: var(--ifm-color-text) !important;
+  border-color: var(--ifm-color-border) !important;
+}
+
+.hero {
+  background-color: var(--ifm-color-background) !important;
+  color: var(--ifm-color-text) !important;
+  border-color: var(--ifm-color-border) !important;
+}
+
+.pagination-nav__link {
+  background-color: var(--ifm-color-background) !important;
+  color: var(--ifm-color-text) !important;
+  border-color: var(--ifm-color-border) !important;
+}
+
+.blockquote {
+  background-color: var(--ifm-color-background-light) !important;
+  color: var(--ifm-color-text) !important;
+  border-color: var(--ifm-color-border) !important;
+}
+
+.section {
+  background-color: var(--ifm-color-background) !important;
+  color: var(--ifm-color-text) !important;
+  border-color: var(--ifm-color-border) !important;
+}
+
+/* Apply theme colors to text elements */
+h1, h2, h3, h4, h5, h6,
+p, span, div, li {
+  color: var(--ifm-color-text) !important;
+}
+
+/* Ensure proper contrast for headings */
+.navbar__title-main,
+.section-title,
+.section-subtitle,
+.capstoneTitle,
+.ctaTitle {
+  color: var(--ifm-color-primary) !important;
+}
+
+/* Ensure proper contrast for secondary text */
+.navbar__item,
+.navbar__link,
+.menu__link,
+.footer__link-item,
+.sectionSubtitle,
+.capstoneDescription,
+.ctaDescription {
+  color: var(--ifm-color-text-secondary) !important;
+}
+
+/* Ensure proper background for interactive elements */
+.navbar__link:hover,
+.menu__link:hover,
+.menu__link--active,
+.navbar__link--active {
+  background-color: var(--ifm-color-background-light) !important;
+  color: var(--ifm-color-primary) !important;
+}
+
+/* Ensure proper contrast for code blocks */
+.codeBlockContainer_node_modules-\@docusaurus-theme-classic-lib-next-theme-CodeBlock-styles-module {
+  background-color: var(--ifm-color-background-card) !important;
+  border-color: var(--ifm-color-border) !important;
+}
+
+/* Ensure proper contrast for buttons */
+.button--primary {
+  background-color: var(--ifm-color-primary) !important;
+  border-color: var(--ifm-color-primary) !important;
+  color: white !important;
+}
+
+.button--primary:hover {
+  background-color: var(--ifm-color-primary-dark) !important;
+  border-color: var(--ifm-color-primary-dark) !important;
+  color: white !important;
+}
+
+.button--secondary {
+  background-color: transparent !important;
+  border-color: var(--ifm-color-border) !important;
+  color: var(--ifm-color-text) !important;
+}
+
+.button--secondary:hover {
+  background-color: var(--ifm-color-background-light) !important;
+  border-color: var(--ifm-color-border-light) !important;
+  color: var(--ifm-color-text) !important;
+}
+
+/* Ensure proper contrast for alerts */
+.alert {
+  background-color: var(--ifm-color-background-surface) !important;
+  border-color: var(--ifm-color-border) !important;
+  color: var(--ifm-color-text) !important;
+}
+
+.alert--primary {
+  background-color: color-mix(in srgb, var(--ifm-color-primary), transparent 90%) !important;
+  border-left-color: var(--ifm-color-primary) !important;
+}
+
+.alert--secondary {
+  background-color: color-mix(in srgb, var(--ifm-color-secondary), transparent 90%) !important;
+  border-left-color: var(--ifm-color-secondary) !important;
+}
+
+.alert--success {
+  background-color: color-mix(in srgb, var(--ifm-color-success), transparent 90%) !important;
+  border-left-color: var(--ifm-color-success) !important;
+}
+
+.alert--info {
+  background-color: color-mix(in srgb, var(--ifm-color-info), transparent 90%) !important;
+  border-left-color: var(--ifm-color-info) !important;
+}
+
+.alert--warning {
+  background-color: color-mix(in srgb, var(--ifm-color-warning), transparent 90%) !important;
+  border-left-color: var(--ifm-color-warning) !important;
+}
+
+.alert--danger {
+  background-color: color-mix(in srgb, var(--ifm-color-danger), transparent 90%) !important;
+  border-left-color: var(--ifm-color-danger) !important;
+}
+
+/* Theme toggle button styling */
+.theme-toggle {
+  background: none !important;
+  border: none !important;
+  cursor: pointer !important;
+  padding: 0.5rem !important;
+  border-radius: 4px !important;
+  color: var(--ifm-color-text-secondary) !important;
+  transition: all 0.2s ease !important;
+}
+
+.theme-toggle:hover {
+  color: var(--ifm-color-primary) !important;
+  background-color: var(--ifm-color-background-light) !important;
+}
+
+/* Ensure proper contrast for SVG icons */
+.header-github-link svg {
+  transition: fill 0.2s ease !important;
+}
+
+/* GitHub icon color for light mode */
+[data-theme='light'] .header-github-link svg {
+  fill: #000000 !important;
+}
+
+/* GitHub icon color for dark mode */
+[data-theme='dark'] .header-github-link svg {
+  fill: #ffffff !important;
+}
+
+/* Ensure consistent styling for all interactive elements */
+button,
+input,
+select,
+textarea {
+  background-color: var(--ifm-color-background-light) !important;
+  color: var(--ifm-color-text) !important;
+  border: 1px solid var(--ifm-color-border) !important;
+}
+
+/* Focus styling for accessibility */
+button:focus,
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 2px solid var(--ifm-color-primary) !important;
+  outline-offset: 2px !important;
+  border-radius: 2px !important;
+}
+
+
+/* Enhanced hero section styling */
+.hero {
+  background-color: var(--ifm-color-background) !important;
+  padding: 4rem 0 !important;
+}
+
+.hero__title {
+  color: var(--ifm-color-text) !important;
+  font-family: var(--ifm-font-family-heading) !important;
+  font-weight: 800 !important;
+  margin-bottom: 1rem !important;
+}
+
+.hero__subtitle {
+  color: var(--ifm-color-text-secondary) !important;
+  font-family: var(--ifm-font-family-base) !important;
+  margin-bottom: 2rem !important;
+}
+
+/* Section-specific theme support */
+.hero,
+.hero__container,
+.hero__content,
+.hero--primary,
+.hero--dark {
+  background-color: var(--ifm-color-background) !important;
+  color: var(--ifm-color-text) !important;
+}
+
+/* Circular Curriculum Section */
+.circularSection {
+  background-color: var(--ifm-color-background) !important;
+  color: var(--ifm-color-text) !important;
+  padding: 0 !important;
+}
+
+/* Skills Section */
+.skillsSection {
+  background-color: var(--ifm-color-background) !important;
+  color: var(--ifm-color-text) !important;
+  padding: 0 !important;
+}
+
+/* Timeline Section */
+.timelineSection {
+  background-color: var(--ifm-color-background) !important;
+  color: var(--ifm-color-text) !important;
+}
+
+/* Features Section */
+.featuresSection {
+  background-color: var(--ifm-color-background) !important;
+  color: var(--ifm-color-text) !important;
+}
+
+/* Capstone Section */
+.capstoneSection {
+  background-color: var(--ifm-color-background) !important;
+  color: var(--ifm-color-text) !important;
+}
+
+/* Call to Action Section */
+.ctaSection {
+  background-color: var(--ifm-color-background) !important;
+  color: var(--ifm-color-text) !important;
+  padding: 0 !important;
+}
+
+.ctaTitle,
+.ctaDescription {
+  color: var(--ifm-color-text) !important;
+}
+
+/* Section headers */
+.sectionHeader,
+.sectionTitle,
+.sectionSubtitle {
+  color: var(--ifm-color-text) !important;
+}
+
+/* Content containers */
+.container {
+  background-color: var(--ifm-color-background) !important;
+  color: var(--ifm-color-text) !important;
+}
+
+/* Cards and content blocks */
+.card,
+.block,
+.content-block {
+  background-color: var(--ifm-color-background-card) !important;
+  color: var(--ifm-color-text) !important;
+  border: 1px solid var(--ifm-color-border) !important;
+}
+
+/* All headings */
+.h1, .h2, .h3, .h4, .h5, .h6,
+.hero__title,
+.section-title,
+.mainTitle,
+.subTitle,
+.capstoneTitle,
+.timelineBadge,
+.skillItem h4 {
+  color: var(--ifm-color-text) !important;
+}
+
+/* All paragraph and text elements */
+p,
+.description,
+.subTitle,
+.sectionSubtitle,
+.capstoneDescription,
+.timelineItem p,
+.skillItem p,
+.requirementItem p {
+  color: var(--ifm-color-text-secondary) !important;
+}
+
+/* All links */
+a,
+.navbar__link,
+.footer__link-item {
+  color: var(--ifm-color-primary) !important;
+}
+
+a:hover,
+.navbar__link:hover,
+.footer__link-item:hover {
+  color: var(--ifm-color-primary-light) !important;
+}
+
+/* Buttons */
+.button {
+  background-color: var(--ifm-color-primary) !important;
+  color: white !important;
+  border: 1px solid var(--ifm-color-primary) !important;
+}
+
+.button--secondary {
+  background-color: transparent !important;
+  color: var(--ifm-color-text) !important;
+  border: 1px solid var(--ifm-color-border) !important;
+}
+
+.button--secondary:hover {
+  background-color: var(--ifm-color-background-light) !important;
+  color: var(--ifm-color-text) !important;
+  border: 1px solid var(--ifm-color-border-light) !important;
+}
+
+/* Enhanced GitHub icon styling */
+.header-github-link {
+  display: flex;
+  align-items: center;
+  color: var(--ifm-color-text-secondary) !important;
+  text-decoration: none !important;
+  margin-left: 0.5rem;
+  padding: 0.5rem 0.75rem !important;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  font-weight: 500;
+  font-family: var(--ifm-font-family-base);
+}
+
+.header-github-link:hover {
+  color: var(--ifm-color-primary) !important;
+  background-color: var(--ifm-color-background-light) !important;
+  text-decoration: none !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+.header-github-link span {
+  position: relative;
+  z-index: 2;
+}
+
+.header-github-link svg {
+  width: 24px;
+  height: 24px;
+  margin-right: 0.5rem;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 2;
+  transition: transform 0.3s ease;
+}
+
+/* GitHub icon color for light mode */
+[data-theme='light'] .header-github-link svg {
+  fill: #000000;
+}
+
+/* GitHub icon color for dark mode */
+[data-theme='dark'] .header-github-link svg {
+  fill: #ffffff;
+}
+
+/* Enhanced footer links styling */
+.footer__link-item {
+  color: var(--ifm-color-text-secondary) !important;
+  transition: all 0.2s ease !important;
+  font-family: var(--ifm-font-family-base);
+}
+
+.footer__link-item:hover {
+  color: var(--ifm-color-primary) !important;
+  text-decoration: none !important;
+}
