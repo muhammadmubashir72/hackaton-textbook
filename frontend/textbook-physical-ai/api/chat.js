@@ -1,23 +1,34 @@
-// For Vercel serverless functions with Node.js runtime
-export default async function handler(request, response) {
-  if (request.method !== 'POST') {
-    return response.status(405).json({ error: 'Method not allowed' });
+// Vercel Serverless Function for API proxy
+export default async function handler(req, res) {
+  // Set CORS headers
+  res.setHeader('Access-Control-Allow-Credentials', true);
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+
+  // Handle preflight request
+  if (req.method === 'OPTIONS') {
+    res.status(200).end();
+    return;
+  }
+
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
   }
 
   try {
-    const body = typeof request.body === 'string' ? JSON.parse(request.body) : request.body;
-    const { query, top_k } = body;
+    const { query, top_k } = req.body;
 
     // Validate inputs
     if (!query) {
-      return response.status(400).json({ error: 'Query is required' });
+      return res.status(400).json({ error: 'Query is required' });
     }
 
     // Use environment variable for backend URL (set in Vercel dashboard)
     const BACKEND_URL = process.env.BACKEND_API_URL || 'https://mubashirsaeedi-ai-book-backend.hf.space';
 
     // Proxy the request to the backend
-    const apiResponse = await fetch(`${BACKEND_URL}/query`, {
+    const response = await fetch(`${BACKEND_URL}/query`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -28,28 +39,26 @@ export default async function handler(request, response) {
       })
     });
 
-    if (!apiResponse.ok) {
-      const errorText = await apiResponse.text();
-      console.error('Backend API error:', apiResponse.status, errorText);
-      return response.status(apiResponse.status).json({
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error('Backend API error:', response.status, errorText);
+      return res.status(response.status).json({
         error: 'Error from backend service',
         details: errorText
       });
     }
 
-    const data = await apiResponse.json();
-
-    response.status(200).json(data);
+    const data = await response.json();
+    res.status(200).json(data);
   } catch (error) {
     console.error('API route error:', error);
-    response.status(500).json({
+    res.status(500).json({
       error: 'Internal server error',
       message: error.message
     });
   }
 }
 
-// Use Node.js runtime instead of Edge
 export const config = {
   runtime: 'nodejs',
 };
