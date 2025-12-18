@@ -1,0 +1,19 @@
+spec:
+  resources:
+    cpu: 2
+    memory: 8Gi
+    gpu: null  # Using CPU only, change to T4 or other GPU if needed
+  requirements:
+    - python=3.10
+    - pip
+  secrets:
+    - GEMINI_API_KEY
+    - COHERE_API_KEY
+    - QDRANT_URL
+    - QDRANT_API_KEY
+  env:
+    - PORT=7860  # Standard Hugging Face Spaces port
+    - PYTHONPATH=/app
+runtime:
+  type: docker
+  entrypoint: python main.py
