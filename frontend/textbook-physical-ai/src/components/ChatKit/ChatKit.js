@@ -1,22 +1,19 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import './ChatKit.css';
 
-// Backend wiring function - using CORS proxy to avoid CORS issues
+// Backend wiring function - using Vercel API route as proxy
 const connectToBackend = async (message, context) => {
   try {
-    // Using a CORS proxy to avoid CORS issues between Vercel frontend and Hugging Face backend
-    const BACKEND_URL = 'https://mubashirsaeedi-ai-book-backend.hf.space';
-    const PROXY_URL = `https://api.allorigins.win/raw?url=${encodeURIComponent(`${BACKEND_URL}/query`)}`;
-
-    // Using fetch with mode 'cors' and proper headers
-    const response = await fetch(PROXY_URL, {
+    // Use Vercel edge function as a CORS proxy
+    const response = await fetch('/api/proxy', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
+        targetUrl: 'https://mubashirsaeedi-ai-book-backend.hf.space/query',
         query: message,
-        top_k: 3 // Retrieve top 3 most relevant results
+        top_k: 3
       })
     });
 
@@ -56,6 +53,12 @@ const connectToBackend = async (message, context) => {
     // In case of any error, return a message that clearly states the limitation
     return `I'm having trouble accessing the book content right now. Error: ${error.message}. Please try again in a moment. If the issue persists, the information you're looking for might not be available in the Physical AI and Humanoid Robotics textbook.`;
   }
+};
+
+// Create a Vercel API route for proxying requests
+// Create the API route file
+const createApiRoute = () => {
+  // This will be created as a separate file, but for now let's create it
 };
 
 // Generate response from Qdrant context
