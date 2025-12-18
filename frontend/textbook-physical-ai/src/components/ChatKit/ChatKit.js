@@ -4,7 +4,7 @@ import './ChatKit.css';
 // Backend wiring function - using Vercel API route as proxy
 const connectToBackend = async (message, context) => {
   try {
-    // Use Vercel edge function as a CORS proxy
+    // Use Vercel Node.js function as a CORS proxy
     const response = await fetch('/api/proxy', {
       method: 'POST',
       headers: {
@@ -53,12 +53,6 @@ const connectToBackend = async (message, context) => {
     // In case of any error, return a message that clearly states the limitation
     return `I'm having trouble accessing the book content right now. Error: ${error.message}. Please try again in a moment. If the issue persists, the information you're looking for might not be available in the Physical AI and Humanoid Robotics textbook.`;
   }
-};
-
-// Create a Vercel API route for proxying requests
-// Create the API route file
-const createApiRoute = () => {
-  // This will be created as a separate file, but for now let's create it
 };
 
 // Generate response from Qdrant context
