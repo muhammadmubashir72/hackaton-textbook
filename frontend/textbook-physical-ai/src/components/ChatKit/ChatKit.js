@@ -1,12 +1,15 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import './ChatKit.css';
 
-// Backend wiring function - now uses local Vercel API route
+// Backend wiring function - using CORS proxy to avoid CORS issues
 const connectToBackend = async (message, context) => {
   try {
-    // Call the local Vercel API route which proxies to the Hugging Face backend
-    // This avoids exposing backend URL and credentials to the browser
-    const response = await fetch('/api/chat', {  // Local API route
+    // Using a CORS proxy to avoid CORS issues between Vercel frontend and Hugging Face backend
+    const BACKEND_URL = 'https://mubashirsaeedi-ai-book-backend.hf.space';
+    const PROXY_URL = `https://api.allorigins.win/raw?url=${encodeURIComponent(`${BACKEND_URL}/query`)}`;
+
+    // Using fetch with mode 'cors' and proper headers
+    const response = await fetch(PROXY_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -22,8 +25,8 @@ const connectToBackend = async (message, context) => {
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.error('Local API error response:', errorText);
-      throw new Error(`Local API error: ${response.status} - ${errorText}`);
+      console.error('Backend API error response:', errorText);
+      throw new Error(`Backend API error: ${response.status} - ${errorText}`);
     }
 
     const data = await response.json();
@@ -38,16 +41,16 @@ const connectToBackend = async (message, context) => {
     // Return the answer from the backend
     return data.answer;
   } catch (error) {
-    console.error('Error connecting to local API:', error);
+    console.error('Error connecting to backend:', error);
     console.error('Full error details:', {
       message: error.message,
       stack: error.stack,
       name: error.name
     });
 
-    // Check for specific network errors
+    // Check for specific network/CORS errors
     if (error instanceof TypeError && error.message.includes('fetch')) {
-      return "I'm having trouble reaching the backend server. This might be due to a network connection issue. Please check your connection and try again.";
+      return "I'm having trouble reaching the backend server. This might be due to a network connection issue or CORS policy. Please check your connection and try again.";
     }
 
     // In case of any error, return a message that clearly states the limitation
