@@ -10,7 +10,7 @@
     },
     {
       "src": "api/chat.js",
-      "use": "@vercel/edge"
+      "use": "@vercel/node"
     }
   ],
   "rewrites": [

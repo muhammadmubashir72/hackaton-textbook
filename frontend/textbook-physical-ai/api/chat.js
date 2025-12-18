@@ -1,31 +1,23 @@
-export const config = {
-  runtime: 'edge',
-};
-
-export default async function handler(request) {
+// For Vercel serverless functions with Node.js runtime
+export default async function handler(request, response) {
   if (request.method !== 'POST') {
-    return new Response(
-      JSON.stringify({ error: 'Method not allowed' }),
-      { status: 405, headers: { 'Content-Type': 'application/json' } }
-    );
+    return response.status(405).json({ error: 'Method not allowed' });
   }
 
   try {
-    const { query, top_k } = await request.json();
+    const body = typeof request.body === 'string' ? JSON.parse(request.body) : request.body;
+    const { query, top_k } = body;
 
     // Validate inputs
     if (!query) {
-      return new Response(
-        JSON.stringify({ error: 'Query is required' }),
-        { status: 400, headers: { 'Content-Type': 'application/json' } }
-      );
+      return response.status(400).json({ error: 'Query is required' });
     }
 
     // Use environment variable for backend URL (set in Vercel dashboard)
     const BACKEND_URL = process.env.BACKEND_API_URL || 'https://mubashirsaeedi-ai-book-backend.hf.space';
-    
+
     // Proxy the request to the backend
-    const response = await fetch(`${BACKEND_URL}/query`, {
+    const apiResponse = await fetch(`${BACKEND_URL}/query`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -36,32 +28,28 @@ export default async function handler(request) {
       })
     });
 
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error('Backend API error:', response.status, errorText);
-      return new Response(
-        JSON.stringify({ 
-          error: 'Error from backend service', 
-          details: errorText 
-        }),
-        { status: response.status, headers: { 'Content-Type': 'application/json' } }
-      );
+    if (!apiResponse.ok) {
+      const errorText = await apiResponse.text();
+      console.error('Backend API error:', apiResponse.status, errorText);
+      return response.status(apiResponse.status).json({
+        error: 'Error from backend service',
+        details: errorText
+      });
     }
 
-    const data = await response.json();
-    
-    return new Response(JSON.stringify(data), {
-      status: 200,
-      headers: { 'Content-Type': 'application/json' },
-    });
+    const data = await apiResponse.json();
+
+    response.status(200).json(data);
   } catch (error) {
     console.error('API route error:', error);
-    return new Response(
-      JSON.stringify({ 
-        error: 'Internal server error', 
-        message: error.message 
-      }),
-      { status: 500, headers: { 'Content-Type': 'application/json' } }
-    );
+    response.status(500).json({
+      error: 'Internal server error',
+      message: error.message
+    });
   }
 }
+
+// Use Node.js runtime instead of Edge
+export const config = {
+  runtime: 'nodejs',
+};
