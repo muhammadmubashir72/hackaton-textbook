@@ -1,19 +1,27 @@
-export default async function handler(req, res) {
-  // Only allow POST requests
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
+export const config = {
+  runtime: 'edge',
+};
+
+export default async function handler(request) {
+  if (request.method !== 'POST') {
+    return new Response(
+      JSON.stringify({ error: 'Method not allowed' }),
+      { status: 405, headers: { 'Content-Type': 'application/json' } }
+    );
   }
 
   try {
-    const { query, top_k } = req.body;
+    const { query, top_k } = await request.json();
 
     // Validate inputs
     if (!query) {
-      return res.status(400).json({ error: 'Query is required' });
+      return new Response(
+        JSON.stringify({ error: 'Query is required' }),
+        { status: 400, headers: { 'Content-Type': 'application/json' } }
+      );
     }
 
     // Use environment variable for backend URL (set in Vercel dashboard)
-    // This will be available server-side in the Vercel function
     const BACKEND_URL = process.env.BACKEND_API_URL || 'https://mubashirsaeedi-ai-book-backend.hf.space';
     
     // Proxy the request to the backend
@@ -31,24 +39,29 @@ export default async function handler(req, res) {
     if (!response.ok) {
       const errorText = await response.text();
       console.error('Backend API error:', response.status, errorText);
-      return res.status(response.status).json({ 
-        error: 'Error from backend service', 
-        details: errorText 
-      });
+      return new Response(
+        JSON.stringify({ 
+          error: 'Error from backend service', 
+          details: errorText 
+        }),
+        { status: response.status, headers: { 'Content-Type': 'application/json' } }
+      );
     }
 
     const data = await response.json();
     
-    return res.status(200).json(data);
+    return new Response(JSON.stringify(data), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' },
+    });
   } catch (error) {
     console.error('API route error:', error);
-    return res.status(500).json({ 
-      error: 'Internal server error', 
-      message: error.message 
-    });
+    return new Response(
+      JSON.stringify({ 
+        error: 'Internal server error', 
+        message: error.message 
+      }),
+      { status: 500, headers: { 'Content-Type': 'application/json' } }
+    );
   }
 }
-
-export const config = {
-  runtime: 'edge',
-};
