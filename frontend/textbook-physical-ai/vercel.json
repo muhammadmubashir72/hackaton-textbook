@@ -9,18 +9,18 @@
       }
     },
     {
-      "src": "api/**/*.js",
+      "src": "api/chat.js",
       "use": "@vercel/edge"
     }
   ],
-  "routes": [
+  "rewrites": [
     {
-      "src": "/api/(.*)",
-      "dest": "/api/$1"
+      "source": "/api/chat",
+      "destination": "/api/chat"
     },
     {
-      "src": "/(.*)",
-      "dest": "/index.html"
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ],
   "headers": [
