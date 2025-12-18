@@ -1,13 +1,12 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import './ChatKit.css';
 
-// Backend wiring function for Qdrant integration
+// Backend wiring function - now uses local Vercel API route
 const connectToBackend = async (message, context) => {
   try {
-    // Call the existing Qdrant backend API to retrieve relevant book content
-    // This connects to your existing Qdrant setup with Cohere integration
-    const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'https://mubashirsaeedi-ai-book-backend.hf.space';
-    const response = await fetch(`${BACKEND_URL}/query`, {  // Connect to your backend server
+    // Call the local Vercel API route which proxies to the Hugging Face backend
+    // This avoids exposing backend URL and credentials to the browser
+    const response = await fetch('/api/chat', {  // Local API route
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -18,11 +17,17 @@ const connectToBackend = async (message, context) => {
       })
     });
 
+    console.log('Response status:', response.status);
+    console.log('Response ok?', response.ok);
+
     if (!response.ok) {
-      throw new Error(`Backend API error: ${response.status}`);
+      const errorText = await response.text();
+      console.error('Local API error response:', errorText);
+      throw new Error(`Local API error: ${response.status} - ${errorText}`);
     }
 
     const data = await response.json();
+    console.log('Response data:', data);
 
     // Check if relevant content was found in the book
     if (!data.answer || data.answer.includes("couldn't find any relevant information") ||
@@ -33,9 +38,20 @@ const connectToBackend = async (message, context) => {
     // Return the answer from the backend
     return data.answer;
   } catch (error) {
-    console.error('Error connecting to Qdrant backend:', error);
+    console.error('Error connecting to local API:', error);
+    console.error('Full error details:', {
+      message: error.message,
+      stack: error.stack,
+      name: error.name
+    });
+
+    // Check for specific network errors
+    if (error instanceof TypeError && error.message.includes('fetch')) {
+      return "I'm having trouble reaching the backend server. This might be due to a network connection issue. Please check your connection and try again.";
+    }
+
     // In case of any error, return a message that clearly states the limitation
-    return "I'm having trouble accessing the book content right now. Please try again in a moment. If the issue persists, the information you're looking for might not be available in the Physical AI and Humanoid Robotics textbook.";
+    return `I'm having trouble accessing the book content right now. Error: ${error.message}. Please try again in a moment. If the issue persists, the information you're looking for might not be available in the Physical AI and Humanoid Robotics textbook.`;
   }
 };
 
