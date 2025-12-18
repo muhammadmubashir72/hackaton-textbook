@@ -10,7 +10,7 @@
     },
     {
       "src": "pages/api/**/*.js",
-      "use": "@vercel/edge"
+      "use": "@vercel/node"
     }
   ],
   "rewrites": [
