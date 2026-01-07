@@ -5,8 +5,8 @@
       "SlashCommand(/sp.tasks)",
       "Bash(npm run build -- --verbose)",
       "Bash(timeout 120 npm run build)",
-      "Bash(mkdir -p specs/002-chatkit-conversational-ui)",
-      "SlashCommand(/sp.specify)"
+      "SlashCommand(/sp.specify)",
+      "Bash(mkdir -p frontend/src/components/Auth)"
     ]
   }
 }

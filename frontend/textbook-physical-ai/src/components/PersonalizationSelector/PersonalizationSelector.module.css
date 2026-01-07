@@ -1,0 +1,185 @@
+.container {
+  padding: 0;
+  margin-right: 0;
+  position: relative;
+}
+
+.selectorButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  background-color: var(--ifm-color-primary);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  min-width: 140px;
+  justify-content: flex-start;
+}
+
+.selectorButton:hover {
+  background-color: var(--ifm-color-primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+}
+
+.icon {
+  flex-shrink: 0;
+}
+
+.label {
+  text-align: left;
+  white-space: nowrap;
+}
+
+.arrowIcon {
+  transition: transform 0.2s ease;
+  opacity: 0.7;
+  margin-left: auto;
+}
+
+.container:hover .arrowIcon {
+  transform: rotate(180deg);
+}
+
+.selectorButton:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.selectorButton.adapting {
+  pointer-events: none;
+  background: var(--ifm-color-emphasis-600);
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  background: var(--ifm-background-color);
+  border: 1px solid var(--ifm-border-color);
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  min-width: 280px;
+  overflow: hidden;
+  animation: slideIn 0.2s ease;
+  z-index: 1001;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: transparent;
+  border: none;
+  width: 100%;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  border-bottom: 1px solid var(--ifm-border-color);
+}
+
+.option:last-child {
+  border-bottom: none;
+}
+
+.option:hover {
+  background: var(--ifm-color-emphasis-100);
+}
+
+.option.active {
+  background: var(--ifm-color-primary);
+  color: white;
+}
+
+.option.active .optionDescription {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.optionIcon {
+  flex-shrink: 0;
+}
+
+.optionContent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  flex: 1;
+}
+
+.optionLabel {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.optionDescription {
+  font-size: 12px;
+  color: var(--ifm-color-emphasis-600);
+}
+
+.checkmarkIcon {
+  color: white;
+  flex-shrink: 0;
+}
+
+.notification {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--ifm-color-primary);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  z-index: 10000;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.notification.show {
+  opacity: 1;
+}
+
+[data-theme='dark'] .option:hover {
+  background: var(--ifm-color-emphasis-200);
+}
+
+[data-theme='dark'] .notification {
+  background: var(--ifm-color-primary);
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -1,0 +1,119 @@
+.container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 1rem;
+  background: var(--ifm-card-background-color);
+  border-radius: var(--ifm-card-border-radius);
+  box-shadow: var(--ifm-global-shadow-lw);
+}
+
+.notAuthenticated {
+  text-align: center;
+  padding: 2rem;
+}
+
+.editorContainer {
+  margin-top: 1rem;
+}
+
+.titleInput {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1.5rem;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: var(--ifm-global-radius);
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+.titleInput:focus {
+  outline: none;
+  border-color: var(--ifm-color-primary);
+  box-shadow: 0 0 0 2px var(--ifm-color-primary-lightest);
+}
+
+.contentArea {
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: var(--ifm-global-radius);
+  font-family: var(--ifm-font-family-monospace);
+  line-height: 1.5;
+  resize: vertical;
+  min-height: 400px;
+}
+
+.contentArea:focus {
+  outline: none;
+  border-color: var(--ifm-color-primary);
+  box-shadow: 0 0 0 2px var(--ifm-color-primary-lightest);
+}
+
+.editorFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.saveButton {
+  background: var(--ifm-color-primary);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--ifm-global-radius);
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.2s ease;
+}
+
+.saveButton:hover:not(.disabled) {
+  background: var(--ifm-color-primary-dark);
+}
+
+.saveButton.disabled {
+  background: var(--ifm-color-emphasis-300);
+  cursor: not-allowed;
+}
+
+.status {
+  padding: 0.5rem 1rem;
+  border-radius: var(--ifm-global-radius);
+  text-align: center;
+  margin-left: 1rem;
+}
+
+.success {
+  background: var(--ifm-color-success-lighter);
+  color: var(--ifm-color-success-contrast-background);
+  border: 1px solid var(--ifm-color-success);
+}
+
+.error {
+  background: var(--ifm-color-danger-lighter);
+  color: var(--ifm-color-danger-contrast-background);
+  border: 1px solid var(--ifm-color-danger);
+}
+
+.markdownHelp {
+  margin-top: 2rem;
+  padding: 1rem;
+  background: var(--ifm-color-emphasis-100);
+  border-radius: var(--ifm-global-radius);
+}
+
+.markdownHelp h4 {
+  margin-top: 0;
+}
+
+.markdownHelp ul {
+  margin-bottom: 0;
+  padding-left: 1.5rem;
+}
+
+.markdownHelp code {
+  background: var(--ifm-color-emphasis-200);
+  padding: 0.2rem 0.4rem;
+  border-radius: var(--ifm-global-radius);
+  font-size: 0.85rem;
+}

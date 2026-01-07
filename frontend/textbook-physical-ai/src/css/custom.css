@@ -4,7 +4,7 @@
  */
 
 /* Import technical fonts */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Source+Sans+3:wght@300;400;600;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Source+Sans+3:wght@300;400;600;700&900&display=swap');
 
 /* Modern technical color palette with two-color combination */
 :root {
@@ -719,257 +719,6 @@ html {
   border-color: var(--ifm-color-border) !important;
 }
 
-/* Apply theme colors to text elements */
-h1, h2, h3, h4, h5, h6,
-p, span, div, li {
-  color: var(--ifm-color-text) !important;
-}
-
-/* Ensure proper contrast for headings */
-.navbar__title-main,
-.section-title,
-.section-subtitle,
-.capstoneTitle,
-.ctaTitle {
-  color: var(--ifm-color-primary) !important;
-}
-
-/* Ensure proper contrast for secondary text */
-.navbar__item,
-.navbar__link,
-.menu__link,
-.footer__link-item,
-.sectionSubtitle,
-.capstoneDescription,
-.ctaDescription {
-  color: var(--ifm-color-text-secondary) !important;
-}
-
-/* Ensure proper background for interactive elements */
-.navbar__link:hover,
-.menu__link:hover,
-.menu__link--active,
-.navbar__link--active {
-  background-color: var(--ifm-color-background-light) !important;
-  color: var(--ifm-color-primary) !important;
-}
-
-/* Ensure proper contrast for code blocks */
-.codeBlockContainer_node_modules-\@docusaurus-theme-classic-lib-next-theme-CodeBlock-styles-module {
-  background-color: var(--ifm-color-background-card) !important;
-  border-color: var(--ifm-color-border) !important;
-}
-
-/* Ensure proper contrast for buttons */
-.button--primary {
-  background-color: var(--ifm-color-primary) !important;
-  border-color: var(--ifm-color-primary) !important;
-  color: white !important;
-}
-
-.button--primary:hover {
-  background-color: var(--ifm-color-primary-dark) !important;
-  border-color: var(--ifm-color-primary-dark) !important;
-  color: white !important;
-}
-
-.button--secondary {
-  background-color: transparent !important;
-  border-color: var(--ifm-color-border) !important;
-  color: var(--ifm-color-text) !important;
-}
-
-.button--secondary:hover {
-  background-color: var(--ifm-color-background-light) !important;
-  border-color: var(--ifm-color-border-light) !important;
-  color: var(--ifm-color-text) !important;
-}
-
-/* Ensure proper contrast for alerts */
-.alert {
-  background-color: var(--ifm-color-background-surface) !important;
-  border-color: var(--ifm-color-border) !important;
-  color: var(--ifm-color-text) !important;
-}
-
-.alert--primary {
-  background-color: color-mix(in srgb, var(--ifm-color-primary), transparent 90%) !important;
-  border-left-color: var(--ifm-color-primary) !important;
-}
-
-.alert--secondary {
-  background-color: color-mix(in srgb, var(--ifm-color-secondary), transparent 90%) !important;
-  border-left-color: var(--ifm-color-secondary) !important;
-}
-
-.alert--success {
-  background-color: color-mix(in srgb, var(--ifm-color-success), transparent 90%) !important;
-  border-left-color: var(--ifm-color-success) !important;
-}
-
-.alert--info {
-  background-color: color-mix(in srgb, var(--ifm-color-info), transparent 90%) !important;
-  border-left-color: var(--ifm-color-info) !important;
-}
-
-.alert--warning {
-  background-color: color-mix(in srgb, var(--ifm-color-warning), transparent 90%) !important;
-  border-left-color: var(--ifm-color-warning) !important;
-}
-
-.alert--danger {
-  background-color: color-mix(in srgb, var(--ifm-color-danger), transparent 90%) !important;
-  border-left-color: var(--ifm-color-danger) !important;
-}
-
-/* Theme toggle button styling */
-.theme-toggle {
-  background: none !important;
-  border: none !important;
-  cursor: pointer !important;
-  padding: 0.5rem !important;
-  border-radius: 4px !important;
-  color: var(--ifm-color-text-secondary) !important;
-  transition: all 0.2s ease !important;
-}
-
-.theme-toggle:hover {
-  color: var(--ifm-color-primary) !important;
-  background-color: var(--ifm-color-background-light) !important;
-}
-
-/* Ensure proper contrast for SVG icons */
-.header-github-link svg {
-  transition: fill 0.2s ease !important;
-}
-
-/* GitHub icon color for light mode */
-[data-theme='light'] .header-github-link svg {
-  fill: #000000 !important;
-}
-
-/* GitHub icon color for dark mode */
-[data-theme='dark'] .header-github-link svg {
-  fill: #ffffff !important;
-}
-
-/* Ensure consistent styling for all interactive elements */
-button,
-input,
-select,
-textarea {
-  background-color: var(--ifm-color-background-light) !important;
-  color: var(--ifm-color-text) !important;
-  border: 1px solid var(--ifm-color-border) !important;
-}
-
-/* Focus styling for accessibility */
-button:focus,
-a:focus,
-input:focus,
-select:focus,
-textarea:focus {
-  outline: 2px solid var(--ifm-color-primary) !important;
-  outline-offset: 2px !important;
-  border-radius: 2px !important;
-}
-
-
-/* Enhanced hero section styling */
-.hero {
-  background-color: var(--ifm-color-background) !important;
-  padding: 4rem 0 !important;
-}
-
-.hero__title {
-  color: var(--ifm-color-text) !important;
-  font-family: var(--ifm-font-family-heading) !important;
-  font-weight: 800 !important;
-  margin-bottom: 1rem !important;
-}
-
-.hero__subtitle {
-  color: var(--ifm-color-text-secondary) !important;
-  font-family: var(--ifm-font-family-base) !important;
-  margin-bottom: 2rem !important;
-}
-
-/* Section-specific theme support */
-.hero,
-.hero__container,
-.hero__content,
-.hero--primary,
-.hero--dark {
-  background-color: var(--ifm-color-background) !important;
-  color: var(--ifm-color-text) !important;
-}
-
-/* Circular Curriculum Section */
-.circularSection {
-  background-color: var(--ifm-color-background) !important;
-  color: var(--ifm-color-text) !important;
-  padding: 0 !important;
-}
-
-/* Skills Section */
-.skillsSection {
-  background-color: var(--ifm-color-background) !important;
-  color: var(--ifm-color-text) !important;
-  padding: 0 !important;
-}
-
-/* Timeline Section */
-.timelineSection {
-  background-color: var(--ifm-color-background) !important;
-  color: var(--ifm-color-text) !important;
-}
-
-/* Features Section */
-.featuresSection {
-  background-color: var(--ifm-color-background) !important;
-  color: var(--ifm-color-text) !important;
-}
-
-/* Capstone Section */
-.capstoneSection {
-  background-color: var(--ifm-color-background) !important;
-  color: var(--ifm-color-text) !important;
-}
-
-/* Call to Action Section */
-.ctaSection {
-  background-color: var(--ifm-color-background) !important;
-  color: var(--ifm-color-text) !important;
-  padding: 0 !important;
-}
-
-.ctaTitle,
-.ctaDescription {
-  color: var(--ifm-color-text) !important;
-}
-
-/* Section headers */
-.sectionHeader,
-.sectionTitle,
-.sectionSubtitle {
-  color: var(--ifm-color-text) !important;
-}
-
-/* Content containers */
-.container {
-  background-color: var(--ifm-color-background) !important;
-  color: var(--ifm-color-text) !important;
-}
-
-/* Cards and content blocks */
-.card,
-.block,
-.content-block {
-  background-color: var(--ifm-color-background-card) !important;
-  color: var(--ifm-color-text) !important;
-  border: 1px solid var(--ifm-color-border) !important;
-}
-
 /* All headings */
 .h1, .h2, .h3, .h4, .h5, .h6,
 .hero__title,
@@ -1085,4 +834,48 @@ a:hover,
 .footer__link-item:hover {
   color: var(--ifm-color-primary) !important;
   text-decoration: none !important;
+}
+
+/* Styles related to AuthButtons and UserDropdown */
+.auth-buttons-container {
+  display: flex;
+  align-items: center;
+  margin-left: 0.5rem;
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.user-profile-container {
+  position: relative;
+}
+
+.user-profile-button:hover {
+  background-color: var(--ifm-color-emphasis-200);
+}
+
+.profile-dropdown {
+  position: absolute;
+  top: 100%; /* Position below the button */
+  right: 0;
+  background-color: var(--ifm-navbar-background-color, #fff);
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  min-width: 160px;
+}
+
+.dropdown-item {
+  display: block;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  color: inherit;
+  transition: background-color 0.2s;
+}
+
+.dropdown-item:hover {
+  background-color: var(--ifm-color-emphasis-200);
 }

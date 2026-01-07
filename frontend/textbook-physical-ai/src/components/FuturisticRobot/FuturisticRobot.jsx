@@ -139,31 +139,17 @@ const FuturisticRobot = ({
   }, [propReducedMotion]);
 
   const drawRobot = (ctx, x, y, scale, colors) => {
-    // Draw orbital path guides to make particle movement more apparent
-    ctx.strokeStyle = 'rgba(0, 255, 255, 0.1)'; // Subtle cyan for inner orbit
-    ctx.lineWidth = 1;
-    ctx.beginPath();
-    ctx.arc(x, y, 60 * (size / 300), 0, Math.PI * 2); // Inner orbit path (updated to match new size)
-    ctx.stroke();
-
-    ctx.strokeStyle = 'rgba(255, 165, 0, 0.1)'; // Subtle orange for outer orbit
-    ctx.beginPath();
-    ctx.arc(x, y, 120 * (size / 300), 0, Math.PI * 2); // Outer orbit path (updated to match new size)
-    ctx.stroke();
-
     // Calculate animation values for more dynamic movement
     const currentTime = Date.now() / 1000; // Convert to seconds
-    const handSwingAngle = Math.sin(currentTime * 3) * 0.4; // Faster swing for more noticeable animation
-    const headBobAngle = Math.sin(currentTime * 2.5) * 0.1; // Gentle head bobbing
-    const bodyGlowPulse = 15 + Math.sin(currentTime * 4) * 5; // Pulsing glow
-    const corePulse = 20 + Math.sin(currentTime * 5) * 8; // Pulsing chest core
+    const handSwingAngle = Math.sin(currentTime * 3) * 0.4;
+    const bodyGlowPulse = 15 + Math.sin(currentTime * 4) * 5;
+    const corePulse = 20 + Math.sin(currentTime * 5) * 8;
 
-    // Draw robot head with animated movement and pulsing glow
+    // Draw robot head with pulsing glow
     ctx.shadowColor = colors.body;
     ctx.shadowBlur = bodyGlowPulse;
     ctx.fillStyle = colors.body;
 
-    // Apply head bobbing motion
     const headOffsetX = x + Math.sin(currentTime * 1.5) * 2;
     const headOffsetY = y - scale * 2 + Math.sin(currentTime * 2) * 1;
 
@@ -171,13 +157,13 @@ const FuturisticRobot = ({
     ctx.arc(headOffsetX, headOffsetY, scale, 0, Math.PI * 2);
     ctx.fill();
 
-    // Draw robot body with pulsing glow
-    ctx.shadowBlur = bodyGlowPulse - 5; // Slightly less than head
+    // Draw robot body
+    ctx.shadowBlur = bodyGlowPulse - 5;
     ctx.beginPath();
     ctx.roundRect ? ctx.roundRect(x - scale, y - scale, scale * 2, scale * 2, 10) : ctx.rect(x - scale, y - scale, scale * 2, scale * 2);
     ctx.fill();
 
-    // Draw animated orange glowing chest core with pulsing effect
+    // Draw glowing chest core
     ctx.shadowColor = colors.core;
     ctx.shadowBlur = corePulse;
     ctx.fillStyle = colors.core;
@@ -185,9 +171,9 @@ const FuturisticRobot = ({
     ctx.arc(x, y, scale * 0.5, 0, Math.PI * 2);
     ctx.fill();
 
-    // Draw animated orange glowing eyes with enhanced glow and blinking effect
-    const eyeBlink = Math.sin(currentTime * 8) > 0.9 ? 0.1 : 0.2; // Occasional blink
-    ctx.shadowBlur = 15 + Math.sin(currentTime * 6) * 3; // Pulsing eye glow
+    // Draw eyes
+    const eyeBlink = Math.sin(currentTime * 8) > 0.9 ? 0.1 : 0.2;
+    ctx.shadowBlur = 15 + Math.sin(currentTime * 6) * 3;
 
     ctx.beginPath();
     ctx.arc(x - scale * 0.3, headOffsetY + 0.2 * scale, scale * eyeBlink, 0, Math.PI * 2);
@@ -196,85 +182,75 @@ const FuturisticRobot = ({
     ctx.arc(x + scale * 0.3, headOffsetY + 0.2 * scale, scale * eyeBlink, 0, Math.PI * 2);
     ctx.fill();
 
-    // Draw animated left arm with more dynamic movement
+    // Draw arms
     ctx.shadowColor = colors.body;
     ctx.shadowBlur = 10;
     ctx.strokeStyle = colors.body;
     ctx.lineWidth = scale * 0.6;
     ctx.lineCap = 'round';
 
-    // Left arm - animated with more distinct circular motion
-    const leftArmAngle = -Math.PI/4 + handSwingAngle + currentTime * 1.5; // More pronounced circular motion
+    const leftArmAngle = -Math.PI/4 + handSwingAngle + currentTime * 1.5;
     const leftArmEndX = x - scale * 3 * Math.cos(leftArmAngle);
-    const leftArmEndY = y - scale + scale * 3 * Math.sin(leftArmAngle); // Extended circular motion for more visible movement
+    const leftArmEndY = y - scale + scale * 3 * Math.sin(leftArmAngle);
 
     ctx.beginPath();
-    ctx.moveTo(x - scale, y - scale * 0.5); // Start from body
-    ctx.lineTo(leftArmEndX, leftArmEndY); // End at hand position
+    ctx.moveTo(x - scale, y - scale * 0.5);
+    ctx.lineTo(leftArmEndX, leftArmEndY);
     ctx.stroke();
 
-    // Draw animated left hand with pulsing effect
     const leftHandSize = scale * 0.5 + Math.sin(currentTime * 7) * 0.1;
     ctx.beginPath();
     ctx.arc(leftArmEndX, leftArmEndY, leftHandSize, 0, Math.PI * 2);
     ctx.fillStyle = colors.body;
     ctx.fill();
 
-    // Draw animated right arm with counter-clockwise circular motion
-    const rightArmAngle = -Math.PI/4 - handSwingAngle - currentTime * 1.5; // Counter-clockwise circular motion
+    const rightArmAngle = -Math.PI/4 - handSwingAngle - currentTime * 1.5;
     const rightArmEndX = x + scale * 3 * Math.cos(rightArmAngle);
-    const rightArmEndY = y - scale + scale * 3 * Math.sin(rightArmAngle); // Extended circular motion for more visible movement
+    const rightArmEndY = y - scale + scale * 3 * Math.sin(rightArmAngle);
 
     ctx.beginPath();
-    ctx.moveTo(x + scale, y - scale * 0.5); // Start from body
-    ctx.lineTo(rightArmEndX, rightArmEndY); // End at hand position
+    ctx.moveTo(x + scale, y - scale * 0.5);
+    ctx.lineTo(rightArmEndX, rightArmEndY);
     ctx.stroke();
 
-    // Draw animated right hand with pulsing effect
     const rightHandSize = scale * 0.5 + Math.sin(currentTime * 7 + Math.PI) * 0.1;
     ctx.beginPath();
     ctx.arc(rightArmEndX, rightArmEndY, rightHandSize, 0, Math.PI * 2);
     ctx.fill();
 
-    // Draw animated left leg with subtle movement
+    // Draw legs
     ctx.shadowColor = colors.body;
     ctx.shadowBlur = 8;
     ctx.strokeStyle = colors.body;
     ctx.lineWidth = scale * 0.55;
-    ctx.lineCap = 'round';
 
-    // Left leg - animated with subtle up/down movement
-    const leftLegAngle = Math.PI/6 + Math.sin(currentTime * 2.5) * 0.15; // Subtle leg swing
+    const leftLegAngle = Math.PI/6 + Math.sin(currentTime * 2.5) * 0.15;
     const leftLegEndX = x - scale * 0.6 + Math.sin(leftLegAngle) * scale * 1.8;
-    const leftLegEndY = y + scale * 2 + Math.cos(leftLegAngle) * scale * 1.8; // Down from body
+    const leftLegEndY = y + scale * 2 + Math.cos(leftLegAngle) * scale * 1.8;
 
     ctx.beginPath();
-    ctx.moveTo(x - scale * 0.3, y + scale); // Start from lower body
-    ctx.lineTo(leftLegEndX, leftLegEndY); // End at foot position
+    ctx.moveTo(x - scale * 0.3, y + scale);
+    ctx.lineTo(leftLegEndX, leftLegEndY);
     ctx.stroke();
 
-    // Draw animated left foot
     ctx.beginPath();
     ctx.arc(leftLegEndX, leftLegEndY, scale * 0.6, 0, Math.PI * 2);
     ctx.fillStyle = colors.body;
     ctx.fill();
 
-    // Draw animated right leg with counter movement
-    const rightLegAngle = Math.PI/6 - Math.sin(currentTime * 2.5) * 0.15; // Counter swing to left leg
+    const rightLegAngle = Math.PI/6 - Math.sin(currentTime * 2.5) * 0.15;
     const rightLegEndX = x + scale * 0.6 + Math.sin(rightLegAngle) * scale * 1.8;
-    const rightLegEndY = y + scale * 2 + Math.cos(rightLegAngle) * scale * 1.8; // Down from body
+    const rightLegEndY = y + scale * 2 + Math.cos(rightLegAngle) * scale * 1.8;
 
     ctx.beginPath();
-    ctx.moveTo(x + scale * 0.3, y + scale); // Start from lower body
-    ctx.lineTo(rightLegEndX, rightLegEndY); // End at foot position
+    ctx.moveTo(x + scale * 0.3, y + scale);
+    ctx.lineTo(rightLegEndX, rightLegEndY);
     ctx.stroke();
 
-    // Draw animated right foot
     ctx.beginPath();
     ctx.arc(rightLegEndX, rightLegEndY, scale * 0.6, 0, Math.PI * 2);
     ctx.fill();
 
-    // Reset shadow
     ctx.shadowBlur = 0;
   };
 

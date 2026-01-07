@@ -30,7 +30,8 @@ class RetrievalService:
             limit=top_k
         )
         # The query_points method returns a Response object with points attribute
-        return [(point.payload["text"], point.payload.get("url", "")) for point in result.points]
+        # Try both 'content' and 'text' field names for backward compatibility
+        return [(point.payload.get("content") or point.payload.get("text", ""), point.payload.get("url", "")) for point in result.points]
 
     def retrieve_with_scores(self, query: str, top_k: int = 5) -> List[Tuple[str, str, float]]:
         """Retrieve relevant documents from Qdrant with scores"""
@@ -41,4 +42,97 @@ class RetrievalService:
             limit=top_k
         )
         # The query_points method returns a Response object with points attribute
-        return [(point.payload["text"], point.payload.get("url", ""), point.score) for point in result.points]
+        # Try both 'content' and 'text' field names for backward compatibility
+        return [(point.payload.get("content") or point.payload.get("text", ""), point.payload.get("url", ""), point.score) for point in result.points]
+
+    def check_translation_cache(self, original_text: str, target_language: str = "ur") -> str:
+        """
+        Check Qdrant metadata for cached translation of the given text
+        """
+        try:
+            # Create a filter to search for the original text in metadata
+            from qdrant_client.http import models
+            search_filter = models.Filter(
+                must=[
+                    models.FieldCondition(
+                        key="original_text.keyword",  # Use keyword for exact match
+                        match=models.MatchValue(value=original_text)
+                    ),
+                    models.FieldCondition(
+                        key="target_language",
+                        match=models.MatchValue(value=target_language)
+                    )
+                ]
+            )
+
+            # Search in the same collection for cached translations
+            result = self.qdrant_client.query_points(
+                collection_name=self.collection_name,
+                query_filter=search_filter,
+                limit=1
+            )
+
+            if result.points:
+                # Found cached translation
+                return result.points[0].payload.get("translated_text", None)
+
+            return None
+        except Exception as e:
+            print(f"Error checking translation cache: {str(e)}")
+            # If the index-based search fails, try a different approach using scroll
+            try:
+                # Use scroll to find matching records without requiring an index
+                scroll_result = self.qdrant_client.scroll(
+                    collection_name=self.collection_name,
+                    scroll_filter=models.Filter(
+                        must=[
+                            models.FieldCondition(
+                                key="target_language",
+                                match=models.MatchValue(value=target_language)
+                            )
+                        ]
+                    ),
+                    limit=100  # Limit to avoid too many results
+                )
+
+                # Manually check each result for the original text
+                for point in scroll_result.points:
+                    if point.payload.get("original_text") == original_text:
+                        return point.payload.get("translated_text", None)
+
+                return None
+            except Exception as e2:
+                print(f"Error with fallback translation cache search: {str(e2)}")
+                return None
+
+    def store_translation_cache(self, original_text: str, translated_text: str, target_language: str = "ur"):
+        """
+        Store translation in Qdrant metadata for future retrieval
+        """
+        try:
+            import uuid
+            from qdrant_client.http.models import PointStruct
+
+            # Create embedding for the original text to store with the translation
+            embedding = self.get_embedding(original_text, input_type="search_document")
+
+            # Create a new point with translation metadata
+            # Ensure original_text is stored as a keyword field for exact matching
+            point = PointStruct(
+                id=str(uuid.uuid4()),
+                vector=embedding,
+                payload={
+                    "original_text": original_text,
+                    "translated_text": translated_text,
+                    "target_language": target_language,
+                    "created_at": str(__import__('datetime').datetime.now())
+                }
+            )
+
+            # Store in the same collection
+            self.qdrant_client.upsert(
+                collection_name=self.collection_name,
+                points=[point]
+            )
+        except Exception as e:
+            print(f"Error storing translation cache: {str(e)}")

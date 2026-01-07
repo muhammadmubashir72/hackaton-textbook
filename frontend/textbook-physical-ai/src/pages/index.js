@@ -4,11 +4,13 @@ import Link from "@docusaurus/Link";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
 import { motion, useScroll, useTransform } from "framer-motion";
+import { useAuth } from "../hooks/useAuth";
 import styles from "./index.module.css";
 import FuturisticRobot from "../components/FuturisticRobot/FuturisticRobot";
 
 export default function Home() {
   const { siteConfig } = useDocusaurusContext();
+  const { isAuthenticated } = useAuth();
   const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
@@ -189,12 +191,21 @@ export default function Home() {
                   >
                     Start the curriculum
                   </Link>
-                  <Link
-                    className="button button--secondary button--lg button--futuristic"
-                    to="https://github.com/"
-                  >
-                    Browse the repo
-                  </Link>
+                  {isAuthenticated ? (
+                    <Link
+                      className="button button--secondary button--lg button--futuristic"
+                      to="/dashboard"
+                    >
+                      Dashboard
+                    </Link>
+                  ) : (
+                    <Link
+                      className="button button--secondary button--lg button--futuristic"
+                      to="/"
+                    >
+                      Sign In / Up
+                    </Link>
+                  )}
                 </div>
                 <div className={styles.features}>
                   <div className={styles.featureItem}>
@@ -547,7 +558,7 @@ export default function Home() {
                       <filter id="metallic">
                         <feSpecularLighting
                           result="spec"
-                          specularColor="#ffffff"
+                          lightingColor="#ffffff"
                           specularExponent="20"
                         >
                           <feDistantLight azimuth="45" elevation="45" />

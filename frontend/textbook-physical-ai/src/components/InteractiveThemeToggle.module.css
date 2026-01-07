@@ -1,0 +1,202 @@
+.themeToggleContainer {
+  position: relative;
+  display: inline-block;
+}
+
+.themeToggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: 2px solid var(--ifm-color-emphasis-200);
+  background-color: var(--ifm-color-emphasis-0);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  min-height: 40px;
+}
+
+.themeToggle:hover {
+  border-color: var(--ifm-color-primary);
+  background-color: var(--ifm-color-emphasis-100);
+}
+
+.themeToggle.active {
+  border-color: var(--ifm-color-primary);
+  background-color: var(--ifm-color-emphasis-200);
+  box-shadow: 0 0 0 2px var(--ifm-color-primary-lighter);
+}
+
+.themeIcon {
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.themeLabel {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--ifm-color-emphasis-800);
+}
+
+.themeSettings {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  background: var(--ifm-color-emphasis-0);
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: 1rem;
+  width: 280px;
+  z-index: 1000;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.settingsSection {
+  margin-bottom: 1rem;
+}
+
+.settingsSection:last-child {
+  margin-bottom: 0;
+}
+
+.sectionTitle {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ifm-color-emphasis-800);
+  margin: 0 0 0.5rem 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.themeModeToggle {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.modeButton {
+  width: 40px;
+  height: 40px;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  background: var(--ifm-color-emphasis-100);
+  cursor: pointer;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.modeButton:hover {
+  background: var(--ifm-color-emphasis-200);
+  border-color: var(--ifm-color-emphasis-400);
+}
+
+.modeButton.active {
+  border-color: var(--ifm-color-primary);
+  background: var(--ifm-color-primary-lightest);
+  box-shadow: 0 0 0 2px var(--ifm-color-primary-lighter);
+}
+
+.colorPalette {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.colorSwatch {
+  width: 32px;
+  height: 32px;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+}
+
+.colorSwatch:hover {
+  transform: scale(1.1);
+  border-color: var(--ifm-color-emphasis-800);
+}
+
+.colorSwatch.active {
+  border-color: var(--ifm-color-emphasis-900);
+  box-shadow: 0 0 0 2px var(--ifm-color-emphasis-200);
+}
+
+.fontSizeOptions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.fontSizeButton {
+  flex: 1;
+  padding: 0.3rem 0.5rem;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  background: var(--ifm-color-emphasis-100);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: all 0.2s ease;
+}
+
+.fontSizeButton:hover {
+  background: var(--ifm-color-emphasis-200);
+  border-color: var(--ifm-color-emphasis-400);
+}
+
+.fontSizeButton.active {
+  background: var(--ifm-color-primary);
+  color: white;
+  border-color: var(--ifm-color-primary);
+}
+
+.accessibilityOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.optionLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  padding: 0.25rem 0;
+}
+
+.checkbox {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .themeSettings {
+    width: 240px;
+    right: -60px; /* Adjust for mobile positioning */
+  }
+
+  .colorPalette {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .themeToggle {
+    padding: 0.4rem 0.8rem;
+    min-height: 36px;
+  }
+}

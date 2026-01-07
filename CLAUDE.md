@@ -208,3 +208,10 @@ Wait for consent; never auto-create ADRs. Group related decisions (stacks, authe
 
 ## Code Standards
 See `.specify/memory/constitution.md` for code quality, testing, performance, security, and architecture principles.
+
+## Active Technologies
+- JavaScript/ES6+ for frontend, Python 3.11 for backend + React 18, Docusaurus, better-auth, axios, JWT libraries (006-frontend-auth-integration)
+- Browser storage (localStorage for refresh tokens, sessionStorage for access tokens) (006-frontend-auth-integration)
+
+## Recent Changes
+- 006-frontend-auth-integration: Added JavaScript/ES6+ for frontend, Python 3.11 for backend + React 18, Docusaurus, better-auth, axios, JWT libraries
