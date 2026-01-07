@@ -118,8 +118,13 @@ async def update_profile_picture(file: UploadFile = File(...), current_user: dic
     with open(file_path, "wb") as buffer:
         shutil.copyfileobj(file.file, buffer)
 
-    # Update user profile with file path
-    profile_data = UserUpdate(profile_picture=file_path)
+    # Create the URL for accessing the uploaded image
+    # This will be accessible at http://backend:port/uploads/profile-pictures/filename
+    backend_url = settings.backend_url or "http://localhost:8001"
+    image_url = f"{backend_url}/{file_path.replace(os.sep, '/')}"
+
+    # Update user profile with the full URL
+    profile_data = UserUpdate(profile_picture=image_url)
     updated_profile = AuthService.update_user_profile(db, current_user["user_id"], profile_data)
 
     return updated_profile

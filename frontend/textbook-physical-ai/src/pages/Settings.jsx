@@ -268,48 +268,199 @@ const Settings = () => {
     </div>
   );
 
+  const renderPrivacySection = () => (
+    <div className={styles.section}>
+      <h3 className={styles.sectionTitle}>Privacy</h3>
+
+      <div className={styles.settingCard}>
+        <div className={styles.settingHeader}>
+          <div className={styles.settingInfo}>
+            <h4 className={styles.settingTitle}>Data Sharing</h4>
+            <p className={styles.settingDescription}>
+              Control how your data is shared with third parties.
+            </p>
+          </div>
+          <label className={styles.toggle}>
+            <input type="checkbox" defaultChecked />
+            <span className={styles.toggleSlider}></span>
+          </label>
+        </div>
+      </div>
+
+      <div className={styles.settingCard}>
+        <div className={styles.settingHeader}>
+          <div className={styles.settingInfo}>
+            <h4 className={styles.settingTitle}>Personalization</h4>
+            <p className={styles.settingDescription}>
+              Allow personalized recommendations based on your activity.
+            </p>
+          </div>
+          <label className={styles.toggle}>
+            <input type="checkbox" defaultChecked />
+            <span className={styles.toggleSlider}></span>
+          </label>
+        </div>
+      </div>
+
+      <div className={styles.settingCard}>
+        <div className={styles.settingHeader}>
+          <div className={styles.settingInfo}>
+            <h4 className={styles.settingTitle}>Analytics</h4>
+            <p className={styles.settingDescription}>
+              Help us improve our service by sharing usage data.
+            </p>
+          </div>
+          <label className={styles.toggle}>
+            <input type="checkbox" />
+            <span className={styles.toggleSlider}></span>
+          </label>
+        </div>
+      </div>
+    </div>
+  );
+
+  const renderNotificationsSection = () => (
+    <div className={styles.section}>
+      <h3 className={styles.sectionTitle}>Notifications</h3>
+
+      <div className={styles.settingCard}>
+        <div className={styles.settingHeader}>
+          <div className={styles.settingInfo}>
+            <h4 className={styles.settingTitle}>Email Notifications</h4>
+            <p className={styles.settingDescription}>
+              Receive important updates and news via email.
+            </p>
+          </div>
+          <label className={styles.toggle}>
+            <input type="checkbox" defaultChecked />
+            <span className={styles.toggleSlider}></span>
+          </label>
+        </div>
+      </div>
+
+      <div className={styles.settingCard}>
+        <div className={styles.settingHeader}>
+          <div className={styles.settingInfo}>
+            <h4 className={styles.settingTitle}>Push Notifications</h4>
+            <p className={styles.settingDescription}>
+              Receive real-time updates on your devices.
+            </p>
+          </div>
+          <label className={styles.toggle}>
+            <input type="checkbox" defaultChecked />
+            <span className={styles.toggleSlider}></span>
+          </label>
+        </div>
+      </div>
+
+      <div className={styles.settingCard}>
+        <div className={styles.settingHeader}>
+          <div className={styles.settingInfo}>
+            <h4 className={styles.settingTitle}>Digest Emails</h4>
+            <p className={styles.settingDescription}>
+              Weekly summary of your learning progress and achievements.
+            </p>
+          </div>
+          <label className={styles.toggle}>
+            <input type="checkbox" />
+            <span className={styles.toggleSlider}></span>
+          </label>
+        </div>
+      </div>
+
+      <div className={styles.settingCard}>
+        <div className={styles.settingHeader}>
+          <div className={styles.settingInfo}>
+            <h4 className={styles.settingTitle}>Learning Reminders</h4>
+            <p className={styles.settingDescription}>
+              Gentle reminders to continue your learning journey.
+            </p>
+          </div>
+          <label className={styles.toggle}>
+            <input type="checkbox" defaultChecked />
+            <span className={styles.toggleSlider}></span>
+          </label>
+        </div>
+      </div>
+    </div>
+  );
+
   return (
     <Layout
       title="Settings"
       description="User Settings Page"
     >
-      <header className="hero hero--primary">
+      <header className="hero hero--primary" style={{ padding: '2rem 0 1.5rem' }}>
         <div className="container">
-          <h1 className="hero__title">Settings</h1>
+          <h1 className="hero__title" style={{ fontSize: '2.5rem' }}>Settings</h1>
           <p className="hero__subtitle">Manage your account preferences and security</p>
         </div>
       </header>
       <main>
         <section className="container margin-vert--lg">
           <div className="row">
-            <div className="col col--10 col--offset-1">
+            <div className="col col--12">
               <div className={styles.settingsContainer}>
                 {/* Sidebar Navigation */}
                 <div className={styles.sidebar}>
-                  <button
-                    className={`${styles.sidebarButton} ${activeSection === 'account' ? styles.active : ''}`}
-                    onClick={() => setActiveSection('account')}
-                  >
-                    <svg className={styles.sidebarIcon} viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-                    </svg>
-                    Account
-                  </button>
-                  <button
-                    className={`${styles.sidebarButton} ${activeSection === 'preferences' ? styles.active : ''}`}
-                    onClick={() => setActiveSection('preferences')}
-                  >
-                    <svg className={styles.sidebarIcon} viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M19.14,12.94c0.04-0.3,0.06-0.61,0.06-0.94c0-0.32-0.02-0.64-0.06-0.94l2.03-1.58c0.18-0.14,0.23-0.41,0.12-0.61 l-1.92-3.32c-0.12-0.22-0.37-0.29-0.59-0.22l-2.39,0.96c-0.5-0.38-1.03-0.7-1.62-0.94L14.4,2.81c-0.04-0.24-0.24-0.41-0.48-0.41 h-3.84c-0.24,0-0.43,0.17-0.47,0.41L9.25,5.35C8.66,5.59,8.12,5.92,7.63,6.29L5.24,5.33c-0.22-0.08-0.47,0-0.59,0.22L2.74,8.87 C2.62,9.08,2.66,9.34,2.86,9.48l2.03,1.58C4.84,11.36,4.8,11.69,4.8,12s0.02,0.64,0.06,0.94l-2.03,1.58 c-0.18,0.14-0.23,0.41-0.12,0.61l1.92,3.32c0.12,0.22,0.37,0.29,0.59,0.22l2.39-0.96c0.5,0.38,1.03,0.7,1.62,0.94l0.36,2.54 c0.05,0.24,0.24,0.41,0.48,0.41h3.84c0.24,0,0.44-0.17,0.47-0.41l0.36-2.54c0.59-0.24,1.13-0.56,1.62-0.94l2.39,0.96 c0.22,0.08,0.47,0,0.59-0.22l1.92-3.32c0.12-0.22,0.07-0.47-0.12-0.61L19.14,12.94z M12,15.6c-1.98,0-3.6-1.62-3.6-3.6 s1.62-3.6,3.6-3.6s3.6,1.62,3.6,3.6S13.98,15.6,12,15.6z"/>
-                    </svg>
-                    Preferences
-                  </button>
+                  <div className={styles.sidebarHeader}>
+                    <h3 className={styles.sidebarTitle}>Settings</h3>
+                    <p className={styles.sidebarSubtitle}>Manage your account</p>
+                  </div>
+                  <nav className={styles.navList}>
+                    <button
+                      className={`${styles.navItem} ${activeSection === 'account' ? styles.active : ''}`}
+                      onClick={() => setActiveSection('account')}
+                    >
+                      <div className={styles.navIcon}>
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                        </svg>
+                      </div>
+                      <span className={styles.navText}>Account</span>
+                    </button>
+                    <button
+                      className={`${styles.navItem} ${activeSection === 'preferences' ? styles.active : ''}`}
+                      onClick={() => setActiveSection('preferences')}
+                    >
+                      <div className={styles.navIcon}>
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M19.14,12.94c0.04-0.3,0.06-0.61,0.06-0.94c0-0.32-0.02-0.64-0.06-0.94l2.03-1.58c0.18-0.14,0.23-0.41,0.12-0.61 l-1.92-3.32c-0.12-0.22-0.37-0.29-0.59-0.22l-2.39,0.96c-0.5-0.38-1.03-0.7-1.62-0.94L14.4,2.81c-0.04-0.24-0.24-0.41-0.48-0.41 h-3.84c-0.24,0-0.43,0.17-0.47,0.41L9.25,5.35C8.66,5.59,8.12,5.92,7.63,6.29L5.24,5.33c-0.22-0.08-0.47,0-0.59,0.22L2.74,8.87 C2.62,9.08,2.66,9.34,2.86,9.48l2.03,1.58C4.84,11.36,4.8,11.69,4.8,12s0.02,0.64,0.06,0.94l-2.03,1.58 c-0.18,0.14-0.23,0.41-0.12,0.61l1.92,3.32c0.12,0.22,0.37,0.29,0.59,0.22l2.39-0.96c0.5,0.38,1.03,0.7,1.62,0.94l0.36,2.54 c0.05,0.24,0.24,0.41,0.48,0.41h3.84c0.24,0,0.44-0.17,0.47-0.41l0.36-2.54c0.59-0.24,1.13-0.56,1.62-0.94l2.39,0.96 c0.22,0.08,0.47,0,0.59-0.22l1.92-3.32c0.12-0.22,0.07-0.47-0.12-0.61L19.14,12.94z M12,15.6c-1.98,0-3.6-1.62-3.6-3.6 s1.62-3.6,3.6-3.6s3.6,1.62,3.6,3.6S13.98,15.6,12,15.6z"/>
+                        </svg>
+                      </div>
+                      <span className={styles.navText}>Preferences</span>
+                    </button>
+                    <button
+                      className={`${styles.navItem} ${activeSection === 'privacy' ? styles.active : ''}`}
+                      onClick={() => setActiveSection('privacy')}
+                    >
+                      <div className={styles.navIcon}>
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M12,1L3,5V11C3,16.55,6.84,21.74,12,23C17.16,21.74,21,16.55,21,11V5L12,1M12,7C13.4,7 14.8,8.6 14.8,10V11.5C15.4,11.5 16,12.4 16,13V16C16,17.4 15.4,18 14.8,18H9.2C8.6,18 8,17.4 8,16V13C8,12.4 8.6,11.5 9.2,11.5V10C9.2,8.6 10.6,7 12,7M12,8.2C11.2,8.2 10.5,8.7 10.5,10V11.5H13.5V10C13.5,8.7 12.8,8.2 12,8.2Z"/>
+                        </svg>
+                      </div>
+                      <span className={styles.navText}>Privacy</span>
+                    </button>
+                    <button
+                      className={`${styles.navItem} ${activeSection === 'notifications' ? styles.active : ''}`}
+                      onClick={() => setActiveSection('notifications')}
+                    >
+                      <div className={styles.navIcon}>
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M12,22A2,2 0 0,1 10,20H14A2,2 0 0,1 12,22M18,16V11C18,7.9 16.36,5.36 13.5,4.68V4C13.5,3 12.5,2 11.5,2S9.5,3 9.5,4V4.68C6.63,5.36 5,7.9 5,11V16L3,18V19H20V18L18,16Z"/>
+                        </svg>
+                      </div>
+                      <span className={styles.navText}>Notifications</span>
+                    </button>
+                  </nav>
                 </div>
 
                 {/* Content */}
                 <div className={styles.content}>
                   {activeSection === 'account' && renderAccountSection()}
                   {activeSection === 'preferences' && renderPreferencesSection()}
+                  {activeSection === 'privacy' && renderPrivacySection()}
+                  {activeSection === 'notifications' && renderNotificationsSection()}
                 </div>
               </div>
             </div>

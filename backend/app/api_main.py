@@ -1,4 +1,5 @@
 from fastapi import FastAPI, HTTPException
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 from typing import List
 from .config import settings
@@ -6,6 +7,7 @@ from .services.retrieval_service import RetrievalService
 from .database import create_all_tables
 from fastapi.middleware.cors import CORSMiddleware
 import re
+import os
 
 # Import auth routes
 from .auth.routes import router as auth_router
@@ -34,6 +36,11 @@ app.add_middleware(
 # Include auth routes
 app.include_router(auth_router, prefix="/api")
 
+# Mount static files directory for serving uploaded images
+uploads_dir = "uploads"
+if os.path.exists(uploads_dir):
+    app.mount("/uploads", StaticFiles(directory=uploads_dir), name="uploads")
+
 # Initialize services
 retrieval_service = RetrievalService()
 
@@ -42,7 +49,6 @@ retrieval_service = RetrievalService()
 def startup_event():
     create_all_tables()
     # Create uploads directory if it doesn't exist
-    import os
     os.makedirs("uploads", exist_ok=True)
     os.makedirs("uploads/profile-pictures", exist_ok=True)
 

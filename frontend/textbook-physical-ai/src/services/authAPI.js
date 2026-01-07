@@ -140,19 +140,35 @@ export const signup = async (email, password, name) => {
 };
 
 
+// Transform user object from snake_case to camelCase
+const transformUserObject = (user) => {
+  if (!user) return null;
+  return {
+    ...user,
+    profilePicture: user.profile_picture || user.profilePicture,
+    profileComplete: user.profile_complete !== undefined ? user.profile_complete : user.profileComplete,
+    createdAt: user.created_at || user.createdAt,
+    updatedAt: user.updated_at || user.updatedAt,
+  };
+};
+
 export const getProfile = async () => {
   const response = await authAPI.get('/profile');
   // Backend returns profile directly, frontend expects { data: { user: {...} } }
   return {
     data: {
-      user: response.data,
+      user: transformUserObject(response.data),
     },
   };
 };
 
 export const updateProfile = async (profileData) => {
   const response = await authAPI.post('/profile', profileData);
-  return response.data;
+  return {
+    data: {
+      user: transformUserObject(response.data),
+    },
+  };
 };
 
 export const updateProfilePicture = async (file) => {
@@ -164,7 +180,12 @@ export const updateProfilePicture = async (file) => {
       'Content-Type': 'multipart/form-data',
     },
   });
-  return response.data;
+  // Backend returns user profile directly, wrap it in expected format
+  return {
+    data: {
+      user: transformUserObject(response.data),
+    },
+  };
 };
 
 export const signin = async (email, password) => {

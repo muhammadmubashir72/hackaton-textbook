@@ -2,10 +2,22 @@ from typing import List, Tuple
 import cohere
 from qdrant_client import QdrantClient
 from ..config import settings
+import google.generativeai as genai
 
 class RetrievalService:
     def __init__(self):
-        self.cohere_client = cohere.Client(settings.cohere_api_key)
+        # Force use Gemini embeddings due to Cohere API quota limits
+        self.use_gemini = True
+        genai.configure(api_key=settings.gemini_api_key)
+        print("RetrievalService initialized with Gemini embeddings")
+
+        # Keep Cohere client as backup but don't use by default
+        try:
+            self.cohere_client = cohere.Client(settings.cohere_api_key)
+        except Exception as e:
+            print(f"Cohere client not available: {e}")
+            self.cohere_client = None
+
         self.qdrant_client = QdrantClient(
             url=settings.qdrant_url,
             api_key=settings.qdrant_api_key,
@@ -13,13 +25,28 @@ class RetrievalService:
         self.collection_name = settings.collection_name
 
     def get_embedding(self, text: str, input_type: str = "search_query") -> List[float]:
-        """Get embedding vector from Cohere Embed v3"""
-        response = self.cohere_client.embed(
-            model=settings.embedding_model,
-            input_type=input_type,
-            texts=[text],
-        )
-        return response.embeddings[0]  # Return the first embedding
+        """Get embedding vector from Cohere Embed v3 or Gemini as fallback"""
+        try:
+            if not self.use_gemini:
+                response = self.cohere_client.embed(
+                    model=settings.embedding_model,
+                    input_type=input_type,
+                    texts=[text],
+                )
+                return response.embeddings[0]  # Return the first embedding
+        except Exception as e:
+            print(f"Cohere embedding failed: {e}. Switching to Gemini.")
+            self.use_gemini = True
+
+        # Fallback to Gemini embeddings
+        if self.use_gemini:
+            genai.configure(api_key=settings.gemini_api_key)
+            result = genai.embed_content(
+                model="models/text-embedding-004",
+                content=text,
+                task_type="retrieval_query" if input_type == "search_query" else "retrieval_document"
+            )
+            return result['embedding']
 
     def retrieve(self, query: str, top_k: int = 5) -> List[Tuple[str, str]]:
         """Retrieve relevant documents from Qdrant"""

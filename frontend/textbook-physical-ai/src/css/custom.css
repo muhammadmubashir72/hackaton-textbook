@@ -3,6 +3,9 @@
  * Two-color combination of purple and teal with consistent typography and solid color schemes
  */
 
+/* Import design system */
+@import './design-system.css';
+
 /* Import technical fonts */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Source+Sans+3:wght@300;400;600;700&900&display=swap');
 
